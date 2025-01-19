@@ -1,30 +1,61 @@
 import React from "react";
 import { HiArrowNarrowRight } from "react-icons/hi";
-import { Link } from "react-scroll"; // Importujte Link z react-scroll
+import { Link } from "react-scroll";
+import Typewriter from "typewriter-effect";
 
 const Home = () => {
   return (
-    <div name="home" className="w-full h-screen bg-[#0a192f]">
+    <div
+      name="home"
+      className="w-full h-screen 
+                 bg-gradient-to-r from-[#0a192f] via-[#0f2a40] to-[#0a192f]
+                 flex items-center"
+    >
       {/* Container */}
-      <div className="max-w-[1000px] mx-auto px-8 flex flex-col justify-center h-full">
-        <h1 className="text-4xl sm:text-7xl font-bold text-[#ccd6f6]">
+      <div className="max-w-[1000px] mx-auto px-8 flex flex-col justify-center">
+        {/* Jméno */}
+        <h1 className="text-4xl sm:text-7xl font-bold text-[#ccd6f6] mb-2">
           JAROSLAV WOLNÝ
         </h1>
-        <h2 className="text-4xl sm:text-7xl font-bold text-[#8892b0]">
-          Front-end Developer
+
+        {/* Pozice s typovacím efektem */}
+        <h2 className="text-3xl sm:text-5xl font-bold text-yellow-400 mb-6">
+          <Typewriter
+            options={{
+              strings: [
+                "Front-end Developer",
+                "Creative Coder",
+                "UI Enthusiast",
+              ],
+              autoStart: true,
+              loop: true,
+            }}
+          />
         </h2>
 
-        <div>
-          {/* Použijte Link z react-scroll s nastavením pro plynulý přesun */}
-          <Link
-            to="work" // Název cílové sekce, na kterou se chcete přesunout
-            smooth={true} // Plynulý přesun
-            duration={500} // Doba trvání animace v milisekundách
-          >
-            <button className="text-white group border-2 px-6 py-3 my-2 flex items-center hover:bg-yellow-400 hover:border-yellow-400">
+        {/* Krátký popis */}
+        <p className="text-[#8892b0] max-w-[700px] mb-8">
+          I create and build modern web experiences, focusing on performance,
+          accessibility, and striking visuals. Scroll down to see my recent
+          work!
+        </p>
+
+        {/* Tlačítka (CTA) */}
+        <div className="flex gap-4">
+          <Link to="work" smooth={true} duration={500}>
+            <button className="text-white group border-2 px-6 py-3 flex items-center hover:bg-yellow-400 hover:border-yellow-400">
               View Works
-              <span className="group-hover:rotate-90 duration-300">
-                <HiArrowNarrowRight className="ml-3" />
+              <span className="group-hover:rotate-90 duration-300 ml-3">
+                <HiArrowNarrowRight />
+              </span>
+            </button>
+          </Link>
+
+          <Link to="contact" smooth={true} duration={500}>
+            <button className="text-white group border-2 px-6 py-3 flex items-center hover:bg-pink-500 hover:border-pink-500">
+              Contact Me
+              <span className="group-hover:rotate-90 duration-300 ml-3">
+                <HiArrowNarrowRight />
               </span>
             </button>
           </Link>
