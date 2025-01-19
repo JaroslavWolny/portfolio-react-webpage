@@ -2,12 +2,14 @@
   "name": "portfolio-react-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jaroslavwolny.github.io/portfolio-react-webpage",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "autoprefixer": "^10.4.16",
     "framer-motion": "^11.18.1",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -21,6 +23,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
