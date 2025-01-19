@@ -5,6 +5,7 @@ import {
   FaGithub,
   FaLinkedin,
   FaInstagram,
+  FaBehance,
 } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { Link } from "react-scroll";
@@ -14,9 +15,10 @@ const Navbar = () => {
   const [nav, setNav] = useState(false);
   const [bg, setBg] = useState(false); // stav pro změnu barvy pozadí při scrollu
 
+  // Ovládání hamburgeru
   const handleClick = () => setNav(!nav);
 
-  // Při scrollování mění stav `bg`, který řídí průhlednost navbaru
+  // Při scrollování mění stav `bg`
   const handleScroll = () => {
     if (window.scrollY >= 80) {
       setBg(true);
@@ -25,6 +27,7 @@ const Navbar = () => {
     }
   };
 
+  // Přidání event listeneru při načtení
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -38,9 +41,9 @@ const Navbar = () => {
         transition-colors duration-300
         ${
           bg
-            ? // Pokud uživatel sjel níže, navbar dostane sytější (méně průhledný) vzhled
+            ? // Pokud uživatel sjel níže, navbar dostane sytější vzhled
               "bg-gradient-to-r from-[#0a192f] via-[#0f2a40] to-[#0a192f] bg-opacity-90 backdrop-blur-none"
-            : // Když je uživatel na vrchu stránky, ukážeme průhledný / glass efekt
+            : // Když je nahoře, ukážeme průhledný / glass efekt
               "bg-gradient-to-r from-[#0a192f]/30 via-[#0f2a40]/30 to-[#0a192f]/30 backdrop-blur-md"
         }
       `}
@@ -84,7 +87,7 @@ const Navbar = () => {
         </li>
       </ul>
 
-      {/* Hamburger ikona (jen pro mobily) */}
+      {/* Hamburger ikona (pro mobily) */}
       <div onClick={handleClick} className="md:hidden z-10 cursor-pointer">
         {!nav ? <FaBars size={25} /> : <FaTimes size={25} />}
       </div>
@@ -127,9 +130,10 @@ const Navbar = () => {
         </li>
       </ul>
 
-      {/* Sociální ikony (sidebar) */}
-      <div className="hidden lg:flex fixed flex-col top-[35%] left-0">
+      {/* Sidebar vlevo (sociální ikony) */}
+      <div className="hidden lg:flex fixed flex-col top-1/2 left-0 transform -translate-y-1/2">
         <ul>
+          {/* LinkedIn */}
           <li
             className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] 
                        hover:ml-[-10px] duration-300 bg-blue-600 shadow-lg rounded-lg"
@@ -143,6 +147,7 @@ const Navbar = () => {
               Linkedin <FaLinkedin size={30} className="ml-2" />
             </a>
           </li>
+          {/* Github */}
           <li
             className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px]
                        hover:ml-[-10px] duration-300 bg-[#333333] shadow-lg rounded-lg"
@@ -156,6 +161,7 @@ const Navbar = () => {
               Github <FaGithub size={30} className="ml-2" />
             </a>
           </li>
+          {/* Email */}
           <li
             className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px]
                        hover:ml-[-10px] duration-300 bg-[#6fc2b0] shadow-lg rounded-lg"
@@ -167,6 +173,7 @@ const Navbar = () => {
               Email <HiOutlineMail size={30} className="ml-2" />
             </a>
           </li>
+          {/* Instagram */}
           <li
             className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px]
                        hover:ml-[-10px] duration-300 bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] shadow-lg rounded-lg"
@@ -178,6 +185,20 @@ const Navbar = () => {
               rel="noopener noreferrer"
             >
               Instagram <FaInstagram size={30} className="ml-2" />
+            </a>
+          </li>
+          {/* Behance */}
+          <li
+            className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px]
+                       hover:ml-[-10px] duration-300 bg-[#1769ff] shadow-lg rounded-lg"
+          >
+            <a
+              className="flex justify-between items-center w-full text-white font-semibold"
+              href="https://www.behance.net/jaroslavwoln"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Behance <FaBehance size={30} className="ml-2" />
             </a>
           </li>
         </ul>

@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div
       name="home"
-      className="w-full h-screen 
+      className="w-full h-screen
                  bg-gradient-to-r from-[#0a192f] via-[#0f2a40] to-[#0a192f]
                  flex items-center"
     >
@@ -24,8 +24,9 @@ const Home = () => {
             options={{
               strings: [
                 "Front-end Developer",
+                "Graphic Designer",
                 "Creative Coder",
-                "UI Enthusiast",
+                "UI & UX Enthusiast",
               ],
               autoStart: true,
               loop: true,
@@ -35,9 +36,10 @@ const Home = () => {
 
         {/* Krátký popis */}
         <p className="text-[#8892b0] max-w-[700px] mb-8">
-          I create and build modern web experiences, focusing on performance,
-          accessibility, and striking visuals. Scroll down to see my recent
-          work!
+          I craft immersive and visually striking digital experiences, merging
+          my passion for front-end development with graphic design. Every line
+          of code and pixel serves a purpose, creating web solutions that are
+          not only functional, but also memorable.
         </p>
 
         {/* Tlačítka (CTA) */}
