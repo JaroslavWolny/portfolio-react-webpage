@@ -1,8 +1,12 @@
 {
   "files": {
-    "main.css": "/portfolio-react-webpage/static/css/main.5a35691a.css",
-    "main.js": "/portfolio-react-webpage/static/js/main.c846b2b6.js",
+    "main.css": "/portfolio-react-webpage/static/css/main.7339d76a.css",
+    "main.js": "/portfolio-react-webpage/static/js/main.7e042929.js",
+    "static/media/graphic4.png": "/portfolio-react-webpage/static/media/graphic4.441cc7f3a47b15c0e40d.png",
     "static/media/project5.png": "/portfolio-react-webpage/static/media/project5.2cd5d60728f518c7a51b.png",
+    "static/media/graphic2.png": "/portfolio-react-webpage/static/media/graphic2.fe95dbc3f7c4b9819490.png",
+    "static/media/graphic1.png": "/portfolio-react-webpage/static/media/graphic1.5e39ffecd6db7e3fca1a.png",
+    "static/media/graphic3.png": "/portfolio-react-webpage/static/media/graphic3.8dbb29fb1e433c02a70d.png",
     "static/media/project1.png": "/portfolio-react-webpage/static/media/project1.c4d49260fe776a4ec96b.png",
     "static/media/project4.png": "/portfolio-react-webpage/static/media/project4.6f8fd476028bf4582c81.png",
     "static/media/project3.png": "/portfolio-react-webpage/static/media/project3.1f7cf3665d219f196ef0.png",
@@ -14,11 +18,11 @@
     "static/media/css.png": "/portfolio-react-webpage/static/media/css.69a82c2d9e45c933a9cb.png",
     "static/media/javascript.png": "/portfolio-react-webpage/static/media/javascript.1ccd6ef9bb1f9c84ef00.png",
     "index.html": "/portfolio-react-webpage/index.html",
-    "main.5a35691a.css.map": "/portfolio-react-webpage/static/css/main.5a35691a.css.map",
-    "main.c846b2b6.js.map": "/portfolio-react-webpage/static/js/main.c846b2b6.js.map"
+    "main.7339d76a.css.map": "/portfolio-react-webpage/static/css/main.7339d76a.css.map",
+    "main.7e042929.js.map": "/portfolio-react-webpage/static/js/main.7e042929.js.map"
   },
   "entrypoints": [
-    "static/css/main.5a35691a.css",
-    "static/js/main.c846b2b6.js"
+    "static/css/main.7339d76a.css",
+    "static/js/main.7e042929.js"
   ]
 }
