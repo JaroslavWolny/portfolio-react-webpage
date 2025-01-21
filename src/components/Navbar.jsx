@@ -13,9 +13,7 @@ import Logo from "../assets/jaro.png";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
-  const [bg, setBg] = useState(false); // stav pro změnu barvy pozadí při scrollu
-
-  // Ovládání hamburgeru
+  const [bg, setBg] = useState(false);
   const handleClick = () => setNav(!nav);
 
   // Při scrollování mění stav `bg`
@@ -27,7 +25,6 @@ const Navbar = () => {
     }
   };
 
-  // Přidání event listeneru při načtení
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -41,14 +38,12 @@ const Navbar = () => {
         transition-colors duration-300
         ${
           bg
-            ? // Pokud uživatel sjel níže, navbar dostane sytější vzhled
-              "bg-gradient-to-r from-[#0a192f] via-[#0f2a40] to-[#0a192f] bg-opacity-90 backdrop-blur-none"
-            : // Když je nahoře, ukážeme průhledný / glass efekt
-              "bg-gradient-to-r from-[#0a192f]/30 via-[#0f2a40]/30 to-[#0a192f]/30 backdrop-blur-md"
+            ? "bg-gradient-to-r from-[#0a192f] via-[#0f2a40] to-[#0a192f] bg-opacity-90 backdrop-blur-none"
+            : "bg-gradient-to-r from-[#0a192f]/30 via-[#0f2a40]/30 to-[#0a192f]/30 backdrop-blur-md"
         }
       `}
     >
-      {/* Logo vlevo */}
+      {/* Logo */}
       <div>
         <img src={Logo} alt="Logo" style={{ width: "80px" }} />
       </div>
@@ -87,7 +82,7 @@ const Navbar = () => {
         </li>
       </ul>
 
-      {/* Hamburger ikona (pro mobily) */}
+      {/* Hamburger */}
       <div onClick={handleClick} className="md:hidden z-10 cursor-pointer">
         {!nav ? <FaBars size={25} /> : <FaTimes size={25} />}
       </div>
@@ -130,7 +125,7 @@ const Navbar = () => {
         </li>
       </ul>
 
-      {/* Sidebar vlevo (sociální ikony) */}
+      {/* Sidebar (sociální ikony) */}
       <div className="hidden lg:flex fixed flex-col top-1/2 left-0 transform -translate-y-1/2">
         <ul>
           {/* LinkedIn */}

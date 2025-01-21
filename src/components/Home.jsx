@@ -18,7 +18,7 @@ const Home = () => {
           JAROSLAV WOLNÝ
         </h1>
 
-        {/* Pozice s typovacím efektem */}
+        {/* Text s typovacím efektem */}
         <h2 className="text-3xl sm:text-5xl font-bold text-yellow-400 mb-6">
           <Typewriter
             options={{
@@ -42,7 +42,7 @@ const Home = () => {
           not only functional, but also memorable.
         </p>
 
-        {/* Tlačítka (CTA) */}
+        {/* Tlačítka navigace */}
         <div className="flex gap-4">
           <Link to="work" smooth={true} duration={500}>
             <button className="text-white group border-2 px-6 py-3 flex items-center hover:bg-yellow-400 hover:border-yellow-400">

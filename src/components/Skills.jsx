@@ -11,73 +11,191 @@ const Skills = () => {
   return (
     <div
       name="skills"
-      className="w-full h-screen 
-                 bg-gradient-to-r from-[#0a192f] via-[#0f2a40] to-[#0a192f]
-                 text-gray-300"
+      className="
+        w-full
+        min-h-screen
+        bg-gradient-to-r 
+        from-[#0a192f] 
+        via-[#0f2a40] 
+        to-[#0a192f]
+        text-gray-300
+        flex
+        items-center
+      "
     >
       {/* Container */}
-      <div className="max-w-[1000px] mx-auto p-4 flex flex-col justify-center w-full h-full">
+      <div className="max-w-[1000px] mx-auto p-4 flex flex-col justify-center w-full">
+        {/* Nadpis */}
         <div>
           <p className="text-4xl font-bold inline border-b-4 border-yellow-400">
             Skills
           </p>
-          <p className="py-4">// These are the technologies I’ve worked with</p>
+          <p className="py-4">These are the technologies I’ve worked with</p>
         </div>
 
         {/* Grid s technologiemi */}
-        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-4 text-center py-8">
+        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-8 text-center py-8">
           {/* HTML */}
-          <div className="shadow-md shadow-[#040c16] hover:scale-110 hover:shadow-lg transition-transform duration-500">
-            <img className="w-20 mx-auto" src={HTML} alt="HTML icon" />
-            <p className="my-4">HTML</p>
+          <div
+            className="
+              bg-[#0a192f]/40
+              rounded-lg
+              shadow-md 
+              shadow-[#040c16] 
+              hover:shadow-lg 
+              hover:bg-[#0a192f]/60 
+              transition 
+              duration-500 
+              flex 
+              flex-col 
+              items-center 
+              p-6
+            "
+          >
+            <img className="w-16 mx-auto mb-2" src={HTML} alt="HTML icon" />
+            <p className="mt-2 font-semibold tracking-wider">HTML</p>
           </div>
 
           {/* CSS */}
-          <div className="shadow-md shadow-[#040c16] hover:scale-110 hover:shadow-lg transition-transform duration-500">
-            <img className="w-20 mx-auto" src={CSS} alt="CSS icon" />
-            <p className="my-4">CSS</p>
+          <div
+            className="
+              bg-[#0a192f]/40
+              rounded-lg
+              shadow-md 
+              shadow-[#040c16] 
+              hover:shadow-lg 
+              hover:bg-[#0a192f]/60
+              transition 
+              duration-500 
+              flex 
+              flex-col 
+              items-center 
+              p-6
+            "
+          >
+            <img className="w-16 mx-auto mb-2" src={CSS} alt="CSS icon" />
+            <p className="mt-2 font-semibold tracking-wider">CSS</p>
           </div>
 
           {/* JavaScript */}
-          <div className="shadow-md shadow-[#040c16] hover:scale-110 hover:shadow-lg transition-transform duration-500">
+          <div
+            className="
+              bg-[#0a192f]/40
+              rounded-lg
+              shadow-md 
+              shadow-[#040c16] 
+              hover:shadow-lg 
+              hover:bg-[#0a192f]/60
+              transition 
+              duration-500 
+              flex 
+              flex-col 
+              items-center 
+              p-6
+            "
+          >
             <img
-              className="w-20 mx-auto"
+              className="w-16 mx-auto mb-2"
               src={JavaScript}
               alt="JavaScript icon"
             />
-            <p className="my-4">JAVASCRIPT</p>
+            <p className="mt-2 font-semibold tracking-wider">JavaScript</p>
           </div>
 
           {/* TypeScript */}
-          <div className="shadow-md shadow-[#040c16] hover:scale-110 hover:shadow-lg transition-transform duration-500">
+          <div
+            className="
+              bg-[#0a192f]/40
+              rounded-lg
+              shadow-md 
+              shadow-[#040c16] 
+              hover:shadow-lg 
+              hover:bg-[#0a192f]/60
+              transition 
+              duration-500 
+              flex 
+              flex-col 
+              items-center 
+              p-6
+            "
+          >
             <img
-              className="w-20 mx-auto"
+              className="w-16 mx-auto mb-2"
               src={TypeScript}
               alt="TypeScript icon"
             />
-            <p className="my-4">TYPESCRIPT</p>
+            <p className="mt-2 font-semibold tracking-wider">TypeScript</p>
           </div>
 
           {/* React */}
-          <div className="shadow-md shadow-[#040c16] hover:scale-110 hover:shadow-lg transition-transform duration-500">
-            <img className="w-20 mx-auto" src={ReactImg} alt="React icon" />
-            <p className="my-4">REACT</p>
+          <div
+            className="
+              bg-[#0a192f]/40
+              rounded-lg
+              shadow-md 
+              shadow-[#040c16] 
+              hover:shadow-lg 
+              hover:bg-[#0a192f]/60
+              transition 
+              duration-500 
+              flex 
+              flex-col 
+              items-center 
+              p-6
+            "
+          >
+            <img
+              className="w-16 mx-auto mb-2"
+              src={ReactImg}
+              alt="React icon"
+            />
+            <p className="mt-2 font-semibold tracking-wider">React</p>
           </div>
 
           {/* GitHub */}
-          <div className="shadow-md shadow-[#040c16] hover:scale-110 hover:shadow-lg transition-transform duration-500">
-            <img className="w-20 mx-auto" src={GitHub} alt="GitHub icon" />
-            <p className="my-4">GITHUB</p>
+          <div
+            className="
+              bg-[#0a192f]/40
+              rounded-lg
+              shadow-md 
+              shadow-[#040c16] 
+              hover:shadow-lg 
+              hover:bg-[#0a192f]/60
+              transition 
+              duration-500 
+              flex 
+              flex-col 
+              items-center 
+              p-6
+            "
+          >
+            <img className="w-16 mx-auto mb-2" src={GitHub} alt="GitHub icon" />
+            <p className="mt-2 font-semibold tracking-wider">GitHub</p>
           </div>
 
           {/* Tailwind */}
-          <div className="shadow-md shadow-[#040c16] hover:scale-110 hover:shadow-lg transition-transform duration-500">
+          <div
+            className="
+              bg-[#0a192f]/40
+              rounded-lg
+              shadow-md 
+              shadow-[#040c16] 
+              hover:shadow-lg 
+              hover:bg-[#0a192f]/60
+              transition 
+              duration-500 
+              flex 
+              flex-col 
+              items-center 
+              p-6
+            "
+          >
             <img
-              className="w-20 mx-auto"
+              className="w-16 mx-auto mb-2"
               src={Tailwind}
               alt="Tailwind CSS icon"
             />
-            <p className="my-4">TAILWIND</p>
+            <p className="mt-2 font-semibold tracking-wider">Tailwind</p>
           </div>
         </div>
       </div>

@@ -17,11 +17,7 @@ const Contact = () => {
           <p className="text-4xl font-bold inline border-b-4 border-yellow-400">
             Contact
           </p>
-          {/* Volitelná doplňující věta o kontaktu */}
-          <p className="py-4">
-            {/* // Submit the form below or shoot me an email */}
-            // Let me know how I can help or just say hi!
-          </p>
+          <p className="py-4">Let me know how I can help or just say hi!</p>
         </div>
 
         {/* Pole pro jméno */}
