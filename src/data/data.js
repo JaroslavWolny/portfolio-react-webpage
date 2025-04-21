@@ -55,28 +55,30 @@ export const data = [
     name: "GainsHUB Design",
     image: Graphic1,
     github: "",
-    live: "https://www.behance.net/gallery/200009411/GainsHUB",
+    behance: "https://www.behance.net/gallery/200009411/GainsHUB",
     category: "graphic",
   },
   {
     id: 7,
     name: "Villach DNB Rave Event",
     image: Graphic2,
-    live: "https://www.behance.net/gallery/213663073/Villach-DNB-Rave-Event-Design",
+    behance:
+      "https://www.behance.net/gallery/213663073/Villach-DNB-Rave-Event-Design",
     category: "graphic",
   },
   {
     id: 8,
     name: "Mix Cover Artwork",
     image: Graphic3,
-    live: "https://www.behance.net/gallery/216896805/Mix-Cover-Artwork",
+    behance: "https://www.behance.net/gallery/216896805/Mix-Cover-Artwork",
     category: "graphic",
   },
   {
     id: 9,
     name: "Event Poster Exploration",
-    image: Graphic4, // Nový obrázek
-    live: "https://www.behance.net/gallery/217389931/Event-Poster-Exploration",
+    image: Graphic4,
+    behance:
+      "https://www.behance.net/gallery/217389931/Event-Poster-Exploration",
     category: "graphic",
   },
 ];

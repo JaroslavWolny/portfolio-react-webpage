@@ -1,68 +1,128 @@
-import React from "react";
-import { HiArrowNarrowRight } from "react-icons/hi";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-scroll";
-import Typewriter from "typewriter-effect";
+import { motion, useViewportScroll, useTransform } from "framer-motion";
+import { HiArrowNarrowRight } from "react-icons/hi";
 
 const Home = () => {
+  const { scrollYProgress } = useViewportScroll();
+  const scrollOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+
+  // State for mouse scroll indicator
+  const [mouseOpacity, setMouseOpacity] = useState(0);
+  const [showMouse, setShowMouse] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowMouse(true);
+      setMouseOpacity(1);
+    }, 2500);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    if (!showMouse) return;
+    const handleScroll = () => {
+      // Adjust opacity based on scroll position
+      const y = window.scrollY;
+      const fadeEnd = window.innerHeight * 0.5;
+      let opacity = 1 - y / fadeEnd;
+      if (opacity < 0) opacity = 0;
+      if (opacity > 1) opacity = 1;
+      setMouseOpacity(opacity);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [showMouse]);
+
   return (
-    <div
-      name="home"
-      className="w-full h-screen
-                 bg-gradient-to-r from-[#0a192f] via-[#0f2a40] to-[#0a192f]
-                 flex items-center"
-    >
-      {/* Container */}
-      <div className="max-w-[1000px] mx-auto px-8 flex flex-col justify-center">
-        {/* Jméno */}
-        <h1 className="text-4xl sm:text-7xl font-bold text-[#ccd6f6] mb-2">
+    <div name="home" className="relative w-full h-screen overflow-hidden">
+      {/* Content Container */}
+      <motion.div
+        className="relative z-10 max-w-[1000px] mx-auto h-full px-6 flex flex-col justify-center"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        {/* Animated Heading */}
+        <motion.h1
+          className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 mb-4"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
           JAROSLAV WOLNÝ
-        </h1>
+        </motion.h1>
 
-        {/* Text s typovacím efektem */}
-        <h2 className="text-3xl sm:text-5xl font-bold text-yellow-400 mb-6">
-          <Typewriter
-            options={{
-              strings: [
-                "Front-end Developer",
-                "Graphic Designer",
-                "Creative Coder",
-                "UI & UX Enthusiast",
-              ],
-              autoStart: true,
-              loop: true,
-            }}
-          />
-        </h2>
+        {/* Tagline */}
+        <motion.h2
+          className="text-2xl md:text-4xl font-semibold text-white mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.8 }}
+        >
+          Frontend Developer & Designer
+        </motion.h2>
+        <div className="w-24 h-1 bg-gradient-to-r from-yellow-300 to-pink-400 mb-8"></div>
 
-        {/* Krátký popis */}
-        <p className="text-[#8892b0] max-w-[700px] mb-8">
-          I craft immersive and visually striking digital experiences, merging
-          my passion for front-end development with graphic design. Every line
-          of code and pixel serves a purpose, creating web solutions that are
-          not only functional, but also memorable.
-        </p>
+        {/* Bio */}
+        <motion.p
+          className="text-[#ccd6f6] max-w-[700px] mb-10 leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
+        >
+          Hi, I'm Jaro – a former administrative ninja who swapped folders for
+          JavaScript. When I'm not fine‑tuning React animations, I'm lifting
+          weights or editing videos, because strength should live in pixels too.
+          My mission is to channel office precision and gym energy into code
+          that's as clean as my deadlift.
+        </motion.p>
 
-        {/* Tlačítka navigace */}
-        <div className="flex gap-4">
-          <Link to="work" smooth={true} duration={500}>
-            <button className="text-white group border-2 px-6 py-3 flex items-center hover:bg-yellow-400 hover:border-yellow-400">
+        {/* Buttons */}
+        <motion.div
+          className="flex flex-wrap gap-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.4, duration: 0.8 }}
+        >
+          <Link to="work" smooth duration={500}>
+            <motion.button
+              className="px-8 py-4 bg-white text-[#0a192f] font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+            >
               View Works
-              <span className="group-hover:rotate-90 duration-300 ml-3">
-                <HiArrowNarrowRight />
-              </span>
-            </button>
+            </motion.button>
           </Link>
-
-          <Link to="contact" smooth={true} duration={500}>
-            <button className="text-white group border-2 px-6 py-3 flex items-center hover:bg-pink-500 hover:border-pink-500">
+          <Link to="contact" smooth duration={500}>
+            <motion.button
+              className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg shadow-lg hover:bg-white hover:text-[#0a192f] transform hover:-translate-y-1 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+            >
               Contact Me
-              <span className="group-hover:rotate-90 duration-300 ml-3">
-                <HiArrowNarrowRight />
-              </span>
-            </button>
+              <HiArrowNarrowRight className="inline ml-2" />
+            </motion.button>
           </Link>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll indicator with smooth fade and delayed appearance */}
+      {showMouse && (
+        <motion.div
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          style={{ opacity: mouseOpacity, pointerEvents: "none" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: mouseOpacity }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.div
+            className="w-8 h-14 border-2 border-white rounded-full flex justify-center items-start p-1"
+            animate={{ y: [0, 15, 0] }}
+            transition={{ repeat: Infinity, duration: 2.5 }}
+          >
+            <motion.div className="w-2 h-2 bg-white rounded-full" />
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 };

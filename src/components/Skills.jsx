@@ -1,206 +1,91 @@
 import React from "react";
-import HTML from "../assets/html.png";
-import CSS from "../assets/css.png";
-import JavaScript from "../assets/javascript.png";
-import ReactImg from "../assets/react.png";
-import GitHub from "../assets/github.png";
-import Tailwind from "../assets/tailwind.png";
-import TypeScript from "../assets/typescript.png";
+import { motion } from "framer-motion";
+import {
+  FaReact,
+  FaNodeJs,
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaGitAlt,
+} from "react-icons/fa";
+import {
+  SiTailwindcss,
+  SiTypescript,
+  SiFigma,
+  SiAdobephotoshop,
+} from "react-icons/si";
 
-const Skills = () => {
-  return (
-    <div
-      name="skills"
-      className="
-        w-full
-        min-h-screen
-        bg-gradient-to-r 
-        from-[#0a192f] 
-        via-[#0f2a40] 
-        to-[#0a192f]
-        text-gray-300
-        flex
-        items-center
-      "
-    >
-      {/* Container */}
-      <div className="max-w-[1000px] mx-auto p-4 flex flex-col justify-center w-full">
-        {/* Nadpis */}
-        <div>
-          <p className="text-4xl font-bold inline border-b-4 border-yellow-400">
-            Skills
-          </p>
-          <p className="py-4">These are the technologies I’ve worked with</p>
-        </div>
+const skills = [
+  { name: "React", icon: <FaReact className="text-cyan-400" size={48} /> },
+  { name: "Node.js", icon: <FaNodeJs className="text-green-500" size={48} /> },
+  { name: "HTML5", icon: <FaHtml5 className="text-orange-500" size={48} /> },
+  { name: "CSS3", icon: <FaCss3Alt className="text-blue-500" size={48} /> },
+  { name: "JavaScript", icon: <FaJs className="text-yellow-300" size={48} /> },
+  {
+    name: "TypeScript",
+    icon: <SiTypescript className="text-blue-400" size={48} />,
+  },
+  {
+    name: "Tailwind",
+    icon: <SiTailwindcss className="text-cyan-300" size={48} />,
+  },
+  { name: "Git", icon: <FaGitAlt className="text-orange-400" size={48} /> },
+  { name: "Figma", icon: <SiFigma className="text-pink-400" size={48} /> },
+  {
+    name: "Photoshop",
+    icon: <SiAdobephotoshop className="text-blue-300" size={48} />,
+  },
+];
 
-        {/* Grid s technologiemi */}
-        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-8 text-center py-8">
-          {/* HTML */}
-          <div
-            className="
-              bg-[#0a192f]/40
-              rounded-lg
-              shadow-md 
-              shadow-[#040c16] 
-              hover:shadow-lg 
-              hover:bg-[#0a192f]/60 
-              transition 
-              duration-500 
-              flex 
-              flex-col 
-              items-center 
-              p-6
-            "
-          >
-            <img className="w-16 mx-auto mb-2" src={HTML} alt="HTML icon" />
-            <p className="mt-2 font-semibold tracking-wider">HTML</p>
-          </div>
-
-          {/* CSS */}
-          <div
-            className="
-              bg-[#0a192f]/40
-              rounded-lg
-              shadow-md 
-              shadow-[#040c16] 
-              hover:shadow-lg 
-              hover:bg-[#0a192f]/60
-              transition 
-              duration-500 
-              flex 
-              flex-col 
-              items-center 
-              p-6
-            "
-          >
-            <img className="w-16 mx-auto mb-2" src={CSS} alt="CSS icon" />
-            <p className="mt-2 font-semibold tracking-wider">CSS</p>
-          </div>
-
-          {/* JavaScript */}
-          <div
-            className="
-              bg-[#0a192f]/40
-              rounded-lg
-              shadow-md 
-              shadow-[#040c16] 
-              hover:shadow-lg 
-              hover:bg-[#0a192f]/60
-              transition 
-              duration-500 
-              flex 
-              flex-col 
-              items-center 
-              p-6
-            "
-          >
-            <img
-              className="w-16 mx-auto mb-2"
-              src={JavaScript}
-              alt="JavaScript icon"
-            />
-            <p className="mt-2 font-semibold tracking-wider">JavaScript</p>
-          </div>
-
-          {/* TypeScript */}
-          <div
-            className="
-              bg-[#0a192f]/40
-              rounded-lg
-              shadow-md 
-              shadow-[#040c16] 
-              hover:shadow-lg 
-              hover:bg-[#0a192f]/60
-              transition 
-              duration-500 
-              flex 
-              flex-col 
-              items-center 
-              p-6
-            "
-          >
-            <img
-              className="w-16 mx-auto mb-2"
-              src={TypeScript}
-              alt="TypeScript icon"
-            />
-            <p className="mt-2 font-semibold tracking-wider">TypeScript</p>
-          </div>
-
-          {/* React */}
-          <div
-            className="
-              bg-[#0a192f]/40
-              rounded-lg
-              shadow-md 
-              shadow-[#040c16] 
-              hover:shadow-lg 
-              hover:bg-[#0a192f]/60
-              transition 
-              duration-500 
-              flex 
-              flex-col 
-              items-center 
-              p-6
-            "
-          >
-            <img
-              className="w-16 mx-auto mb-2"
-              src={ReactImg}
-              alt="React icon"
-            />
-            <p className="mt-2 font-semibold tracking-wider">React</p>
-          </div>
-
-          {/* GitHub */}
-          <div
-            className="
-              bg-[#0a192f]/40
-              rounded-lg
-              shadow-md 
-              shadow-[#040c16] 
-              hover:shadow-lg 
-              hover:bg-[#0a192f]/60
-              transition 
-              duration-500 
-              flex 
-              flex-col 
-              items-center 
-              p-6
-            "
-          >
-            <img className="w-16 mx-auto mb-2" src={GitHub} alt="GitHub icon" />
-            <p className="mt-2 font-semibold tracking-wider">GitHub</p>
-          </div>
-
-          {/* Tailwind */}
-          <div
-            className="
-              bg-[#0a192f]/40
-              rounded-lg
-              shadow-md 
-              shadow-[#040c16] 
-              hover:shadow-lg 
-              hover:bg-[#0a192f]/60
-              transition 
-              duration-500 
-              flex 
-              flex-col 
-              items-center 
-              p-6
-            "
-          >
-            <img
-              className="w-16 mx-auto mb-2"
-              src={Tailwind}
-              alt="Tailwind CSS icon"
-            />
-            <p className="mt-2 font-semibold tracking-wider">Tailwind</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
 };
+
+const item = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0 },
+};
+
+const Skills = () => (
+  <div name="skills" className="w-full min-h-screen text-gray-300 py-16">
+    <div className="max-w-[1000px] mx-auto p-4 flex flex-col justify-center w-full h-full">
+      <div className="pb-8">
+        <h2 className="text-5xl md:text-6xl font-extrabold inline bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500">
+          My Skills
+        </h2>
+        <p className="py-6 text-lg text-gray-400">
+          Modern web development stack & design tools I use daily.
+        </p>
+      </div>
+      <motion.div
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {skills.map((skill, idx) => (
+          <motion.div
+            key={skill.name}
+            variants={item}
+            className="bg-[#181c25] rounded-xl shadow-lg hover:shadow-yellow-400/30 hover:-translate-y-2 transition-all duration-300 flex flex-col items-center p-6 group"
+          >
+            <div className="mb-2 group-hover:scale-110 transition-transform duration-300">
+              {skill.icon}
+            </div>
+            <p className="mt-2 font-semibold tracking-wider text-lg group-hover:text-yellow-300 transition-colors">
+              {skill.name}
+            </p>
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
+  </div>
+);
 
 export default Skills;

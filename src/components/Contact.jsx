@@ -1,58 +1,76 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   return (
     <div
       name="contact"
-      className="w-full h-screen 
-                 bg-gradient-to-r from-[#0a192f] via-[#0f2a40] to-[#0a192f]
-                 flex justify-center items-center p-4 text-gray-300"
+      className="relative w-full py-24 flex justify-center items-center p-4 overflow-visible text-gray-300"
     >
-      <form
+      <motion.form
         method="POST"
         action="https://getform.io/f/cdd145f4-6a41-48e4-959f-14cd252cf7f4"
         className="flex flex-col max-w-[600px] w-full"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
       >
         <div className="pb-8">
-          <p className="text-4xl font-bold inline border-b-4 border-yellow-400">
-            Contact
-          </p>
-          <p className="py-4">Let me know how I can help or just say hi!</p>
+          <motion.p
+            className="text-5xl md:text-6xl font-extrabold inline bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 mb-4"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
+            Contact Me
+          </motion.p>
+          <div className="w-24 h-1 bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 mb-6" />
+          <motion.p
+            className="text-gray-400 mb-8 max-w-md"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+          >
+            Whether you have a project in mind or just want to say&nbsp;hi, drop
+            me a message and I’ll reply within 24 hours.
+          </motion.p>
         </div>
 
-        {/* Pole pro jméno */}
+        {/* Name */}
         <input
-          className="p-2 bg-[#ccd6f6] text-gray-900"
+          className="rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 p-3 text-gray-100 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-300"
           type="text"
           placeholder="Name"
           name="name"
+          required
         />
 
-        {/* Pole pro e-mail */}
+        {/* E-mail */}
         <input
-          className="my-4 p-2 bg-[#ccd6f6] text-gray-900"
+          className="my-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 p-3 text-gray-100 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-300"
           type="email"
           placeholder="Email"
           name="email"
+          required
         />
 
-        {/* Textarea pro zprávu */}
+        {/* Text */}
         <textarea
-          className="bg-[#ccd6f6] p-2 text-gray-900"
+          className="rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 p-3 text-gray-100 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-300"
           name="message"
           rows="10"
           placeholder="Message"
+          required
         ></textarea>
 
-        {/* Tlačítko odeslání */}
+        {/* Button_Send */}
         <button
-          className="text-white border-2 hover:bg-yellow-400 hover:border-yellow-400 
-                     px-4 py-3 my-8 mx-auto flex items-center
-                     transition-colors duration-300"
+          type="submit"
+          className="px-8 py-3 my-8 mx-auto text-white font-semibold bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 rounded-xl hover:scale-105 transition-transform duration-300"
         >
-          Send it!
+          Send Message
         </button>
-      </form>
+      </motion.form>
     </div>
   );
 };
