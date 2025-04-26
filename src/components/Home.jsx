@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-scroll";
-import { motion, useViewportScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { HiArrowNarrowRight } from "react-icons/hi";
 
 const Home = () => {
-  const { scrollYProgress } = useViewportScroll();
-  const scrollOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-
   // State for mouse scroll indicator
   const [mouseOpacity, setMouseOpacity] = useState(0);
   const [showMouse, setShowMouse] = useState(false);
@@ -22,7 +19,7 @@ const Home = () => {
   useEffect(() => {
     if (!showMouse) return;
     const handleScroll = () => {
-      // Adjust opacity based on scroll position
+      // Smoothly fade out the mouse indicator on scroll
       const y = window.scrollY;
       const fadeEnd = window.innerHeight * 0.5;
       let opacity = 1 - y / fadeEnd;
@@ -105,10 +102,10 @@ const Home = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator with smooth fade and delayed appearance */}
+      {/* Scroll indicator */}
       {showMouse && (
         <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          className="hidden md:block absolute bottom-10 left-1/2 transform -translate-x-1/2"
           style={{ opacity: mouseOpacity, pointerEvents: "none" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: mouseOpacity }}

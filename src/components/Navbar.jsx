@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -12,7 +12,13 @@ import {
 import { HiOutlineMail } from "react-icons/hi";
 import Logo from "../assets/jaro.png";
 
-const sections = ["home", "my services", "skills", "work", "contact"];
+const sections = [
+  { id: "home", label: "Home" },
+  { id: "services", label: "My Services" },
+  { id: "skills", label: "Skills" },
+  { id: "work", label: "Work" },
+  { id: "contact", label: "Contact" },
+];
 
 const socialLinks = [
   {
@@ -50,6 +56,9 @@ const socialLinks = [
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // Track whether the navbar should be hidden
+  const [hideNav, setHideNav] = useState(false);
+  const prevScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -57,7 +66,25 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Change navbar background color based on scroll position
+  // Navbar hide on scroll down
+  useEffect(() => {
+    const handleHideOnScroll = () => {
+      const currentY = window.scrollY;
+      // Hide the bar
+      if (currentY > prevScrollY.current && currentY > 80) {
+        setHideNav(true);
+      } else {
+        // Scrolling up
+        setHideNav(false);
+      }
+      prevScrollY.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleHideOnScroll);
+    return () => window.removeEventListener("scroll", handleHideOnScroll);
+  }, []);
+
+  // Change navbar background color
   const navBgClass = scrolled
     ? "bg-[#181c25]/80 backdrop-blur-md shadow-lg"
     : "bg-transparent";
@@ -66,7 +93,7 @@ const Navbar = () => {
     <>
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        animate={{ y: hideNav ? -80 : 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
         className={`fixed top-0 w-full z-50 flex items-center px-8 py-2 transition-all duration-300 ${navBgClass}`}
       >
@@ -89,22 +116,22 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex ml-auto space-x-10 uppercase text-[#ccd6f6] font-medium tracking-wide">
-            {sections.map((sec, index) => (
+            {sections.map(({ id, label }, index) => (
               <motion.li
-                key={sec}
+                key={id}
                 initial={{ y: -10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: index * 0.1 }}
                 className="relative group"
               >
                 <Link
-                  to={sec}
+                  to={id}
                   smooth
                   duration={500}
                   offset={-80}
                   className="hover:text-yellow-300 transition-colors"
                 >
-                  {sec.charAt(0).toUpperCase() + sec.slice(1)}
+                  {label}
                 </Link>
                 <motion.span className="absolute left-0 bottom-0 h-[2px] w-full bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
               </motion.li>
@@ -148,22 +175,22 @@ const Navbar = () => {
               <div className="h-[80px]" />
 
               <div className="flex flex-col items-end px-6 space-y-6">
-                {sections.map((sec, index) => (
+                {sections.map(({ id, label }, index) => (
                   <motion.div
-                    key={sec}
+                    key={id}
                     initial={{ x: 20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: index * 0.1 + 0.1 }}
                   >
                     <Link
-                      to={sec}
+                      to={id}
                       smooth
                       duration={500}
                       offset={-80}
                       onClick={() => setNavOpen(false)}
                       className="w-full text-right text-white uppercase font-medium tracking-wide text-lg hover:text-yellow-300 transition-colors duration-200"
                     >
-                      {sec.charAt(0).toUpperCase() + sec.slice(1)}
+                      {label}
                     </Link>
                   </motion.div>
                 ))}
