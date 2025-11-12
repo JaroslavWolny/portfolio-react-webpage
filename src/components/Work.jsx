@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { FaBehance, FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { data as projects } from "../data/data.js";
-import Background from "./Background";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const categories = [
   { key: "all", label: "All" },
@@ -12,110 +11,114 @@ const categories = [
 
 const Work = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const filteredProjects =
-    selectedCategory === "all"
-      ? projects
-      : projects.filter((item) => item.category === selectedCategory);
+
+  const filteredProjects = useMemo(() => {
+    if (selectedCategory === "all") return projects;
+    return projects.filter((item) => item.category === selectedCategory);
+  }, [selectedCategory]);
 
   return (
-    <Background>
-      <section name="work" className="w-full min-h-screen text-gray-300 py-16">
-        <div className="max-w-[1100px] mx-auto px-4 flex flex-col w-full h-full">
-          <header>
-            <h2 className="text-5xl md:text-6xl font-extrabold inline bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500">
-              My&nbsp;Work
-            </h2>
-            <p className="py-4 text-lg text-gray-400">
-              Check out some of my recent work
+    <section name="work" className="w-full py-24 text-white">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-12 px-4">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl space-y-4">
+            <p className="text-sm uppercase tracking-[0.4em] text-white/60">
+              Selected work
             </p>
-          </header>
-
-          {/* Buttons_Filter */}
-          <nav className="flex gap-4 mb-10 mt-4 flex-wrap">
+            <h2 className="text-4xl font-semibold">
+              Where design experiments meet production-ready code.
+            </h2>
+            <p className="text-white/70">
+              A mix of interface builds, creative coding studies and graphic
+              explorations for music, fitness and culture brands.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
             {categories.map((cat) => (
               <button
                 key={cat.key}
                 onClick={() => setSelectedCategory(cat.key)}
-                className={`
-                  px-6 py-2 rounded-full border-2 font-semibold
-                  transition-all duration-300
-                  shadow-sm
-                  ${
-                    selectedCategory === cat.key
-                      ? "bg-yellow-400 border-yellow-400 text-gray-900 scale-105"
-                      : "bg-transparent border-gray-500 text-white hover:bg-yellow-400 hover:border-yellow-400 hover:text-gray-900 hover:scale-105"
-                  }
-                `}
-                aria-pressed={selectedCategory === cat.key}
+                className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all ${
+                  selectedCategory === cat.key
+                    ? "border-white bg-white text-[#050511]"
+                    : "border-white/20 text-white/70 hover:text-white"
+                }`}
               >
                 {cat.label}
               </button>
             ))}
-          </nav>
+          </div>
+        </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence>
             {filteredProjects.map((project) => (
-              <div
+              <motion.article
                 key={project.id}
-                className="bg-[#181c25] rounded-2xl shadow-lg hover:shadow-yellow-400/30 transition-all duration-300 flex flex-col group overflow-hidden border border-white/10 w-[90%] mx-auto sm:w-full"
+                layout
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.4 }}
+                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
               >
-                <motion.div
-                  className="w-full h-40 sm:h-48 bg-cover bg-center relative group-hover:scale-110 transition-transform duration-300"
-                  style={{ backgroundImage: `url(${project.image})` }}
-                />
-                <div className="p-4 sm:p-6 flex flex-col flex-1 w-full">
-                  <h3 className="text-xl font-bold mb-2 text-white group-hover:text-yellow-300 transition-colors">
+                <div className="relative h-56 overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.name || project.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050511] via-transparent to-transparent opacity-60" />
+                  <span className="absolute right-4 top-4 rounded-full border border-white/40 bg-black/40 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white">
+                    {project.category === "graphic" ? "Visual" : "Code"}
+                  </span>
+                </div>
+                <div className="flex flex-col gap-3 p-6">
+                  <h3 className="text-2xl font-semibold">
                     {project.name || project.title}
                   </h3>
                   {project.description && (
-                    <p className="text-gray-400 text-sm mb-4">
-                      {project.description}
-                    </p>
+                    <p className="text-sm text-white/70">{project.description}</p>
                   )}
-                  <div className="flex gap-3 mt-auto">
-                    {project.category === "graphic" ? (
+                  <div className="mt-2 flex flex-wrap gap-3">
+                    {project.category === "graphic" && project.behance && (
                       <a
                         href={project.behance}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white/80 hover:text-white"
                       >
-                        <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500 text-white font-bold shadow hover:bg-blue-600 hover:scale-105 transition-all duration-200">
-                          <FaBehance /> Behance
-                        </button>
+                        <FaBehance /> Shot
                       </a>
-                    ) : (
-                      project.live && (
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 text-gray-900 font-bold shadow hover:scale-105 transition-transform duration-200">
-                            <FaExternalLinkAlt /> Demo
-                          </button>
-                        </a>
-                      )
+                    )}
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#050511]"
+                      >
+                        <FaExternalLinkAlt /> Live
+                      </a>
                     )}
                     {project.github && (
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white/80 hover:text-white"
                       >
-                        <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800 text-white font-bold shadow hover:bg-gray-700 hover:scale-105 transition-all duration-200">
-                          <FaGithub /> Code
-                        </button>
+                        <FaGithub /> Code
                       </a>
                     )}
                   </div>
                 </div>
-              </div>
+              </motion.article>
             ))}
-          </div>
-        </div>
-      </section>
-    </Background>
+          </AnimatePresence>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 

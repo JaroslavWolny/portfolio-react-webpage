@@ -1,126 +1,152 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-scroll";
 import { motion } from "framer-motion";
 import { HiArrowNarrowRight } from "react-icons/hi";
 
+const heroBadges = [
+  { title: "Visual systems", detail: "Design ops + art direction" },
+  { title: "Code in motion", detail: "React + Framer motion" },
+  { title: "3D narratives", detail: "three.js / shaders" },
+];
+
+const stats = [
+  { label: "Visual Identities", value: "24", suffix: "+" },
+  { label: "Code Projects", value: "18", suffix: "+" },
+  { label: "Avg. turnaround", value: "2", suffix: "w" },
+];
+
 const Home = () => {
-  // State for mouse scroll indicator
-  const [mouseOpacity, setMouseOpacity] = useState(0);
-  const [showMouse, setShowMouse] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setShowMouse(true);
-      setMouseOpacity(1);
-    }, 2500);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  useEffect(() => {
-    if (!showMouse) return;
-    const handleScroll = () => {
-      // Smoothly fade out the mouse indicator on scroll
-      const y = window.scrollY;
-      const fadeEnd = window.innerHeight * 0.5;
-      let opacity = 1 - y / fadeEnd;
-      if (opacity < 0) opacity = 0;
-      if (opacity > 1) opacity = 1;
-      setMouseOpacity(opacity);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [showMouse]);
-
   return (
-    <div name="home" className="relative w-full h-screen overflow-hidden">
-      {/* Content Container */}
-      <motion.div
-        className="relative z-10 max-w-[1000px] mx-auto h-full px-6 flex flex-col justify-center"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-      >
-        {/* Animated Heading */}
-        <motion.h1
-          className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 mb-4"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-        >
-          JAROSLAV WOLNÝ
-        </motion.h1>
-
-        {/* Tagline */}
-        <motion.h2
-          className="text-2xl md:text-4xl font-semibold text-white mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.8 }}
-        >
-          Frontend Developer & Designer
-        </motion.h2>
-        <div className="w-24 h-1 bg-gradient-to-r from-yellow-300 to-pink-400 mb-8"></div>
-
-        {/* Bio */}
-        <motion.p
-          className="text-[#ccd6f6] max-w-[700px] mb-10 leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-        >
-          Hi, I'm Jaro – a former administrative ninja who swapped folders for
-          JavaScript. When I'm not fine‑tuning React animations, I'm lifting
-          weights or editing videos, because strength should live in pixels too.
-          My mission is to channel office precision and gym energy into code
-          that's as clean as my deadlift.
-        </motion.p>
-
-        {/* Buttons */}
+    <section
+      name="home"
+      className="relative w-full min-h-screen flex items-center py-24"
+    >
+      <div className="relative z-10 mx-auto grid w-full max-w-[1200px] items-center gap-12 px-4 md:grid-cols-[1.1fr_0.9fr]">
         <motion.div
-          className="flex flex-wrap gap-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.4, duration: 0.8 }}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="space-y-8"
         >
-          <Link to="work" smooth duration={500}>
-            <motion.button
-              className="px-8 py-4 bg-white text-[#0a192f] font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-            >
-              View Works
-            </motion.button>
-          </Link>
-          <Link to="contact" smooth duration={500}>
-            <motion.button
-              className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg shadow-lg hover:bg-white hover:text-[#0a192f] transform hover:-translate-y-1 transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-            >
-              Contact Me
-              <HiArrowNarrowRight className="inline ml-2" />
-            </motion.button>
-          </Link>
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-white/70">
+            NEON VISUAL LAB
+          </div>
+          <div className="space-y-6">
+            <h1 className="text-4xl font-semibold leading-tight text-white md:text-6xl">
+              Frontend developer crafting
+              <span className="block bg-gradient-to-r from-yellow-300 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+                graphic-first 3D experiences
+              </span>
+            </h1>
+            <p className="max-w-2xl text-lg text-white/70">
+              I'm Jaroslav Wolný — blending art‑direction instincts with React,
+              WebGL and motion systems. From magazine-worthy hero sections to
+              responsive product stories, I turn interfaces into interactive
+              artworks.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-4">
+            <Link to="work" smooth duration={500} offset={-100}>
+              <motion.button
+                whileHover={{ scale: 1.03, y: -2 }}
+                className="rounded-2xl bg-white px-8 py-4 text-base font-semibold text-[#050511] shadow-xl shadow-white/30"
+              >
+                Browse selected work
+              </motion.button>
+            </Link>
+            <Link to="contact" smooth duration={500} offset={-100}>
+              <motion.button
+                whileHover={{ scale: 1.03, y: -2 }}
+                className="flex items-center gap-2 rounded-2xl border border-white/30 px-8 py-4 text-base font-semibold text-white"
+              >
+                Book a build
+                <HiArrowNarrowRight />
+              </motion.button>
+            </Link>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-3">
+            {stats.map((stat) => (
+              <motion.div
+                key={stat.label}
+                whileHover={{ y: -4 }}
+                className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-black/30"
+              >
+                <p className="text-3xl font-semibold text-white">
+                  {stat.value}
+                  <span className="text-pink-400">{stat.suffix}</span>
+                </p>
+                <p className="text-xs uppercase tracking-wide text-white/60">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
-      </motion.div>
 
-      {/* Scroll indicator */}
-      {showMouse && (
         <motion.div
-          className="hidden md:block absolute bottom-10 left-1/2 transform -translate-x-1/2"
-          style={{ opacity: mouseOpacity, pointerEvents: "none" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: mouseOpacity }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.9 }}
+          className="relative"
         >
+          <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/50">
+            <div className="space-y-4">
+              <p className="text-sm uppercase tracking-[0.4em] text-white/60">
+                CREATIVE BOARD
+              </p>
+              <p className="text-3xl font-semibold text-white">
+                Designing kinetic layouts for digital art brands.
+              </p>
+              <p className="text-sm text-white/70">
+                Combining generative gradients, three.js objects and
+                micro‑interactions for immersive storytelling.
+              </p>
+            </div>
+
+            <div className="mt-8 grid gap-3">
+              {heroBadges.map((badge) => (
+                <div
+                  key={badge.title}
+                  className="rounded-2xl border border-white/10 bg-[#080b1d]/70 px-4 py-3"
+                >
+                  <p className="text-sm font-semibold text-white">
+                    {badge.title}
+                  </p>
+                  <p className="text-xs text-white/60">{badge.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <motion.div
-            className="w-8 h-14 border-2 border-white rounded-full flex justify-center items-start p-1"
-            animate={{ y: [0, 15, 0] }}
-            transition={{ repeat: Infinity, duration: 2.5 }}
+            className="absolute -right-6 -top-10 w-48 rounded-3xl border border-white/10 bg-gradient-to-br from-pink-500/70 via-purple-500/60 to-indigo-500/60 p-4 backdrop-blur-xl shadow-2xl shadow-pink-400/30"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ repeat: Infinity, duration: 6 }}
           >
-            <motion.div className="w-2 h-2 bg-white rounded-full" />
+            <p className="text-xs uppercase tracking-[0.3em] text-white/70">
+              NOW PLAYING
+            </p>
+            <p className="text-lg font-semibold text-white">
+              Behance drops
+            </p>
+            <span className="text-sm text-white/70">Posters & visual art</span>
+          </motion.div>
+
+          <motion.div
+            className="absolute -left-4 bottom-6 w-40 rounded-3xl border border-white/10 bg-white/10 p-4 backdrop-blur-2xl"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 8, delay: 1 }}
+          >
+            <p className="text-4xl font-semibold text-white">94%</p>
+            <p className="text-xs uppercase tracking-wide text-white/60">
+              wow-factor score
+            </p>
           </motion.div>
         </motion.div>
-      )}
-    </div>
+      </div>
+    </section>
   );
 };
 

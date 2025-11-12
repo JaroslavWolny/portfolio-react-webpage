@@ -1,110 +1,144 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaCode, FaPaintBrush, FaVideo, FaInstagram } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import {
+  TbBrandAdobe,
+  TbCodeCircle2,
+  TbCameraBolt,
+  TbHexagon3D,
+} from "react-icons/tb";
+
+const services = [
+  {
+    title: "Creative engineering",
+    description:
+      "Design systems, high-polish landing pages and immersive product flows coded in React, Next.js and Framer Motion.",
+    tags: ["React", "Next.js", "Vite", "Edge APIs"],
+    accent: "from-yellow-300 via-orange-400 to-pink-500",
+    icon: TbCodeCircle2,
+  },
+  {
+    title: "Visual direction",
+    description:
+      "Graphic identities, editorial layouts and bold typography explorations built straight from Figma into code.",
+    tags: ["Figma", "Clash Display", "Kinetic Type"],
+    accent: "from-pink-500 via-purple-500 to-indigo-500",
+    icon: TbHexagon3D,
+  },
+  {
+    title: "Motion & video",
+    description:
+      "Reels, launch trailers and looping hero videos color-graded for neon atmospheres.",
+    tags: ["Premiere Pro", "After Effects", "60fps"],
+    accent: "from-sky-400 via-cyan-400 to-emerald-400",
+    icon: TbCameraBolt,
+  },
+];
 
 const About = () => {
-  const services = [
-    {
-      title: "Web Development",
-      icon: <FaCode className="text-yellow-300" size={48} />,
-      desc: "I architect blazing‑fast React front‑ends that load in a blink, animate with Framer Motion flair and tap resilient edge APIs—code that's lean, accessible and future‑proof.",
-    },
-    {
-      title: "Design",
-      icon: <FaPaintBrush className="text-pink-400" size={48} />,
-      desc: "Figma & Photoshop are my playgrounds—I weave vibrant gradients, glassy layers and kinetic type into layouts that breathe accessibility and micro‑joy.",
-      ig: "https://www.instagram.com/jarofreeman/",
-    },
-    {
-      title: "Video Editing",
-      icon: <FaVideo className="text-purple-400" size={48} />,
-      desc: "From gym clips to launch promos, I cut stories at 60 fps, blend motion‑graphics neon and export reels that pop on any feed.",
-      ig: "https://www.instagram.com/jarofreeman/",
-    },
-  ];
-
   return (
-    <div
-      name="services"
-      className="relative w-full py-24 overflow-visible text-gray-300"
-    >
-      <motion.div
-        className="relative z-10 flex flex-col items-center w-full"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-      >
-        <div className="max-w-[1000px] w-full grid grid-cols-2 gap-8 px-4">
-          <div>
-            <motion.p
-              className="text-5xl md:text-6xl font-extrabold inline bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 mb-4"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-            >
-              My Services
-            </motion.p>
-            <div className="w-24 h-1 bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 mb-8" />
-            <p className="text-base md:text-lg text-gray-400 max-w-md">
-              Code<span className="text-yellow-300">.</span> Color
-              <span className="text-pink-400">.</span> Motion
-              <span className="text-purple-400">.</span>
-              That’s the trio I,{" "}
-              <span className="font-semibold text-yellow-300">Jaro</span>, blend
-              into every project.
-            </p>
-          </div>
+    <section name="services" className="relative w-full py-24 text-white">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-10 px-4">
+        <div className="space-y-6 text-left md:text-center">
+          <p className="text-sm uppercase tracking-[0.4em] text-white/60">
+            Services & Process
+          </p>
+          <h2 className="text-4xl font-semibold leading-tight md:text-5xl">
+            <span className="bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 bg-clip-text text-transparent">
+              Design engineered
+            </span>{" "}
+            for visual-first brands.
+          </h2>
+          <p className="mx-auto max-w-3xl text-lg text-white/70">
+            I blend art direction with production-ready code: storyboards in
+            Figma, shader sketches in Blender and performant React builds. Each
+            release gets custom typography, bespoke gradients and micro-
+            interactions tuned to the brand pulse.
+          </p>
         </div>
 
-        {/* Services timeline */}
-        <div className="relative w-full max-w-[800px] mx-auto flex flex-col items-center mt-12 px-4">
-          {/* Vertical line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-[2px] bg-gradient-to-b from-yellow-300 via-pink-400 to-purple-500 opacity-30" />
-
-          {services.map((s, i) => {
-            const isLeft = i % 2 === 0;
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {services.map((service, index) => {
+            const Icon = service.icon;
             return (
-              <motion.div
-                key={s.title}
-                className={`relative w-[90%] mx-auto md:w-[45%] md:mx-0 ${
-                  isLeft ? "md:self-start md:pr-12" : "md:self-end md:pl-12"
-                } mb-16`}
-                initial={{ opacity: 0, y: 30 }}
+              <motion.article
+                key={service.title}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + i * 0.2, duration: 0.8 }}
-                viewport={{ once: true }}
+                transition={{ delay: 0.1 * index }}
+                viewport={{ once: true, amount: 0.4 }}
+                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
               >
-                {/* connector dot */}
                 <div
-                  className={`hidden md:block absolute top-6 ${
-                    isLeft ? "right-[-8px]" : "left-[-8px]"
-                  } w-4 h-4 rounded-full bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500`}
+                  className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-40`}
                 />
-
-                <div className="bg-[#181c25]/80 backdrop-blur-md rounded-xl p-6 shadow hover:-translate-y-2 hover:shadow-yellow-400/20 transition-all duration-300">
-                  <div className="mb-4 flex justify-center">{s.icon}</div>
-                  <h3 className="text-2xl font-semibold text-yellow-300 mb-2 text-center">
-                    {s.title}
-                  </h3>
-                  <p className="text-[#ccd6f6] text-center">{s.desc}</p>
-                  {s.ig && (
-                    <a
-                      href={s.ig}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-4 inline-flex items-center justify-center text-pink-400 hover:text-yellow-300 transition-colors"
-                    >
-                      <FaInstagram size={22} />
-                      <span className="sr-only">Instagram</span>
-                    </a>
-                  )}
+                <div className="relative flex flex-col gap-4">
+                  <div className="flex items-center justify-between">
+                    <div className="rounded-2xl border border-white/20 bg-[#060a1d]/80 p-3">
+                      <Icon size={28} />
+                    </div>
+                    <span className="text-xs uppercase tracking-[0.4em] text-white/50">
+                      0{index + 1}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-semibold">{service.title}</h3>
+                  <p className="text-sm text-white/70">{service.description}</p>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {service.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-white/20 px-3 py-1 text-xs uppercase tracking-wide text-white/70"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
+              </motion.article>
             );
           })}
         </div>
-      </motion.div>
-    </div>
+
+        <motion.div
+          className="relative mt-8 grid gap-6 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 p-8 backdrop-blur-2xl md:grid-cols-[1.1fr_0.9fr]"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <div>
+            <p className="text-sm uppercase tracking-[0.4em] text-white/60">
+              Process reel
+            </p>
+            <h3 className="mt-4 text-3xl font-semibold">
+              Workshop → Artboard → Interactive canvas
+            </h3>
+            <p className="mt-4 text-white/70">
+              I start with analog sketchbooks, move into Figma for systems and
+              prototypes, then translate everything into code with Framer Motion
+              and three.js for immersive layers.
+            </p>
+          </div>
+          <div className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-[#060a1d]/70 p-6 text-sm text-white/70">
+            <div className="flex items-center justify-between text-white">
+              <span className="text-lg font-semibold">Inspiration log</span>
+              <TbBrandAdobe size={26} />
+            </div>
+            <p>
+              Poster studies, kinetic typography and 3D typography experiments —
+              catch the latest drops on Instagram.
+            </p>
+            <a
+              href="https://www.instagram.com/justbyjaro"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-pink-300 hover:text-white"
+            >
+              <FaInstagram /> Visual journal
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 

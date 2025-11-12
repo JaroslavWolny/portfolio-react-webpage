@@ -15,77 +15,113 @@ import {
   SiAdobephotoshop,
 } from "react-icons/si";
 
-const skills = [
-  { name: "React", icon: <FaReact className="text-cyan-400" size={48} /> },
-  { name: "Node.js", icon: <FaNodeJs className="text-green-500" size={48} /> },
-  { name: "HTML5", icon: <FaHtml5 className="text-orange-500" size={48} /> },
-  { name: "CSS3", icon: <FaCss3Alt className="text-blue-500" size={48} /> },
-  { name: "JavaScript", icon: <FaJs className="text-yellow-300" size={48} /> },
+const skillBadges = [
+  { name: "React", icon: <FaReact className="text-cyan-300" size={36} /> },
+  { name: "TypeScript", icon: <SiTypescript className="text-sky-400" size={30} /> },
+  { name: "Node.js", icon: <FaNodeJs className="text-emerald-400" size={32} /> },
+  { name: "Tailwind", icon: <SiTailwindcss className="text-cyan-200" size={30} /> },
+  { name: "JavaScript", icon: <FaJs className="text-yellow-300" size={32} /> },
+  { name: "Figma", icon: <SiFigma className="text-pink-400" size={30} /> },
+  { name: "HTML5", icon: <FaHtml5 className="text-orange-400" size={32} /> },
+  { name: "CSS3", icon: <FaCss3Alt className="text-blue-400" size={32} /> },
+  { name: "Photoshop", icon: <SiAdobephotoshop className="text-indigo-300" size={30} /> },
+  { name: "Git", icon: <FaGitAlt className="text-orange-300" size={32} /> },
+];
+
+const stacks = [
   {
-    name: "TypeScript",
-    icon: <SiTypescript className="text-blue-400" size={48} />,
+    title: "Experience engineering",
+    description:
+      "Component systems, motion blueprints and performance budgets tuned for launch campaigns.",
+    bullets: ["Design tokens", "GSAP / Framer Motion", "Accessibility QA"],
   },
   {
-    name: "Tailwind",
-    icon: <SiTailwindcss className="text-cyan-300" size={48} />,
+    title: "Realtime & 3D",
+    description:
+      "three.js scenes, shaders and WebGL layers that amplify brand storytelling.",
+    bullets: ["@react-three/fiber", "Custom shaders", "GPU particles"],
   },
-  { name: "Git", icon: <FaGitAlt className="text-orange-400" size={48} /> },
-  { name: "Figma", icon: <SiFigma className="text-pink-400" size={48} /> },
   {
-    name: "Photoshop",
-    icon: <SiAdobephotoshop className="text-blue-300" size={48} />,
+    title: "Visual operations",
+    description:
+      "Branded toolkits, templates and creative automation for social drops.",
+    bullets: ["Figma libraries", "Adobe suite", "Motion presets"],
   },
 ];
 
-const container = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0 },
-};
-
 const Skills = () => (
-  <div name="skills" className="w-full min-h-screen text-gray-300 py-16">
-    <div className="max-w-[1000px] mx-auto p-4 flex flex-col justify-center w-full h-full">
-      <div className="pb-8">
-        <h2 className="text-5xl md:text-6xl font-extrabold inline bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500">
-          My Skills
-        </h2>
-        <p className="py-6 text-lg text-gray-400">
-          Modern web development stack & design tools I use daily.
+  <section name="skills" className="w-full py-24 text-white">
+    <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-12 px-4">
+      <div className="space-y-4">
+        <p className="text-sm uppercase tracking-[0.4em] text-white/60">
+          Capabilities
         </p>
+        <div className="space-y-4">
+          <h2 className="text-4xl font-semibold">
+            A multi-disciplinary stack for immersive digital art products.
+          </h2>
+          <p className="max-w-2xl text-white/70">
+            I obsess over the bridge between visual identity and living
+            interfaces — pairing component-driven code with editorial design,
+            typography and motion. Here’s how I break down the toolkit.
+          </p>
+        </div>
       </div>
-      <motion.div
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8"
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        {skills.map((skill, idx) => (
-          <motion.div
-            key={skill.name}
-            variants={item}
-            className="bg-[#181c25] rounded-xl shadow-lg hover:shadow-yellow-400/30 hover:-translate-y-2 transition-all duration-300 flex flex-col items-center p-6 group"
-          >
-            <div className="mb-2 group-hover:scale-110 transition-transform duration-300">
-              {skill.icon}
-            </div>
-            <p className="mt-2 font-semibold tracking-wider text-lg group-hover:text-yellow-300 transition-colors">
-              {skill.name}
-            </p>
-          </motion.div>
-        ))}
-      </motion.div>
+
+      <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="space-y-6">
+          {stacks.map((stack, index) => (
+            <motion.article
+              key={stack.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: index * 0.1 }}
+              className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+            >
+              <p className="text-sm uppercase tracking-[0.3em] text-white/60">
+                Stack 0{index + 1}
+              </p>
+              <h3 className="mt-2 text-2xl font-semibold">{stack.title}</h3>
+              <p className="mt-2 text-sm text-white/70">{stack.description}</p>
+              <ul className="mt-4 flex flex-wrap gap-3 text-xs text-white/70">
+                {stack.bullets.map((bullet) => (
+                  <li
+                    key={bullet}
+                    className="rounded-full border border-white/15 px-4 py-1 uppercase tracking-wide"
+                  >
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            </motion.article>
+          ))}
+        </div>
+
+        <motion.div
+          className="rounded-3xl border border-white/10 bg-[#060a1d]/70 p-6 backdrop-blur"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <p className="text-sm uppercase tracking-[0.3em] text-white/60">
+            Toolset
+          </p>
+          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {skillBadges.map((skill) => (
+              <div
+                key={skill.name}
+                className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center text-sm font-semibold text-white/80"
+              >
+                <div className="mb-2 flex justify-center">{skill.icon}</div>
+                {skill.name}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </div>
-  </div>
+  </section>
 );
 
 export default Skills;

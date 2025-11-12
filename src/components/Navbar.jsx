@@ -1,256 +1,189 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  FaBars,
-  FaTimes,
-  FaGithub,
-  FaLinkedin,
-  FaInstagram,
-  FaBehance,
-} from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
-import Logo from "../assets/jaro.png";
+import { FaBehance, FaGithub, FaLinkedin } from "react-icons/fa";
+import { HiOutlineMenuAlt4 } from "react-icons/hi";
+import { IoClose } from "react-icons/io5";
 
-const sections = [
+const navItems = [
   { id: "home", label: "Home" },
-  { id: "services", label: "My Services" },
+  { id: "services", label: "Services" },
   { id: "skills", label: "Skills" },
-  { id: "work", label: "Work" },
+  { id: "work", label: "Projects" },
   { id: "contact", label: "Contact" },
 ];
 
-const socialLinks = [
+const socials = [
   {
+    id: "linkedin",
+    icon: <FaLinkedin size={20} />,
     href: "https://www.linkedin.com/in/jaroslav-wolný-b9281221a",
-    icon: <FaLinkedin size={28} />,
-    label: "LinkedIn",
-    color: "bg-blue-600",
   },
   {
+    id: "github",
+    icon: <FaGithub size={20} />,
     href: "https://github.com/JaroslavWolny",
-    icon: <FaGithub size={28} />,
-    label: "GitHub",
-    color: "bg-[#333333]",
   },
   {
-    href: "mailto:jaroslav.wolny97@gmail.com",
-    icon: <HiOutlineMail size={28} />,
-    label: "Email",
-    color: "bg-[#6fc2b0]",
-  },
-  {
-    href: "https://www.instagram.com/justbyjaro",
-    icon: <FaInstagram size={28} />,
-    label: "Instagram",
-    color: "bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045]",
-  },
-  {
+    id: "behance",
+    icon: <FaBehance size={20} />,
     href: "https://www.behance.net/jaroslavwoln",
-    icon: <FaBehance size={28} />,
-    label: "Behance",
-    color: "bg-[#1769ff]",
   },
 ];
 
 const Navbar = () => {
-  const [navOpen, setNavOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  // Track whether the navbar should be hidden
-  const [hideNav, setHideNav] = useState(false);
-  const prevScrollY = useRef(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [condensed, setCondensed] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setCondensed(window.scrollY > 24);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Navbar hide on scroll down
-  useEffect(() => {
-    const handleHideOnScroll = () => {
-      const currentY = window.scrollY;
-      // Hide the bar
-      if (currentY > prevScrollY.current && currentY > 80) {
-        setHideNav(true);
-      } else {
-        // Scrolling up
-        setHideNav(false);
-      }
-      prevScrollY.current = currentY;
-    };
-
-    window.addEventListener("scroll", handleHideOnScroll);
-    return () => window.removeEventListener("scroll", handleHideOnScroll);
-  }, []);
-
-  // Change navbar background color
-  const navBgClass = scrolled
-    ? "bg-[#181c25]/80 backdrop-blur-md shadow-lg"
-    : "bg-transparent";
+  const navLinkClasses =
+    "text-sm font-semibold tracking-wide text-white/70 hover:text-white transition-colors px-4 py-2 rounded-full";
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: hideNav ? -80 : 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 w-full z-50 flex items-center px-8 py-2 transition-all duration-300 ${navBgClass}`}
-      >
-        <div className="max-w-[1200px] mx-auto w-full flex items-center">
-          {/* Logo */}
-          <Link
-            to="home"
-            smooth
-            duration={500}
-            onClick={() => setNavOpen(false)}
-          >
-            <motion.img
-              src={Logo}
-              alt="Logo"
-              className="w-20 cursor-pointer filter drop-shadow-lg"
-              whileHover={{ scale: 1.05, rotate: 3 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            />
-          </Link>
-
-          {/* Desktop Menu */}
-          <ul className="hidden md:flex ml-auto space-x-10 uppercase text-[#ccd6f6] font-medium tracking-wide">
-            {sections.map(({ id, label }, index) => (
-              <motion.li
-                key={id}
-                initial={{ y: -10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: index * 0.1 }}
-                className="relative group"
-              >
-                <Link
-                  to={id}
-                  smooth
-                  duration={500}
-                  offset={-80}
-                  className="hover:text-yellow-300 transition-colors"
-                >
-                  {label}
-                </Link>
-                <motion.span className="absolute left-0 bottom-0 h-[2px] w-full bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
-              </motion.li>
-            ))}
-          </ul>
-
-          {/* Mobile Hamburger */}
-          <div className="md:hidden ml-auto">
-            <button
-              onClick={() => setNavOpen((prev) => !prev)}
-              className="text-gray-200 focus:outline-none"
-              aria-label={navOpen ? "Zavřít menu" : "Otevřít menu"}
-            >
-              {!navOpen ? <FaBars size={28} /> : <FaTimes size={28} />}
-            </button>
-          </div>
-        </div>
-      </motion.nav>
-
-      {/* Mobile Backdrop & Menu */}
-      <AnimatePresence>
-        {navOpen && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black/70 z-30"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setNavOpen(false)}
-            />
-
-            <motion.div
-              className={`fixed top-0 right-0 h-screen w-3/4 sm:w-1/2 z-40 bg-[#181c25]/95 backdrop-blur-md overflow-y-auto`}
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 260, damping: 30 }}
-            >
-              {/* Spacer for navbar height */}
-              <div className="h-[80px]" />
-
-              <div className="flex flex-col items-end px-6 space-y-6">
-                {sections.map(({ id, label }, index) => (
-                  <motion.div
-                    key={id}
-                    initial={{ x: 20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: index * 0.1 + 0.1 }}
-                  >
-                    <Link
-                      to={id}
-                      smooth
-                      duration={500}
-                      offset={-80}
-                      onClick={() => setNavOpen(false)}
-                      className="w-full text-right text-white uppercase font-medium tracking-wide text-lg hover:text-yellow-300 transition-colors duration-200"
-                    >
-                      {label}
-                    </Link>
-                  </motion.div>
-                ))}
-                <motion.div
-                  className="mt-8 flex space-x-6"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: sections.length * 0.1 + 0.3 }}
-                >
-                  {socialLinks.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white hover:text-yellow-300 transition-colors"
-                      aria-label={link.label}
-                    >
-                      {link.icon}
-                    </a>
-                  ))}
-                </motion.div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Sidebar (desktop only) */}
-      <div
-        className="hidden lg:flex flex-col"
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: 0,
-          transform: "translateY(-50%)",
-          zIndex: 40,
+    <header className="fixed top-4 left-1/2 z-40 w-full -translate-x-1/2 px-4">
+      <motion.div
+        className="mx-auto max-w-[1200px] rounded-full border border-white/10 bg-[#050511]/40 backdrop-blur-2xl flex items-center gap-4 px-4 md:px-6 py-3"
+        animate={{
+          boxShadow: condensed
+            ? "0px 20px 60px rgba(15, 23, 42, 0.6)"
+            : "0px 10px 30px rgba(15, 23, 42, 0.2)",
+          opacity: condensed ? 0.95 : 1,
+          scale: condensed ? 0.98 : 1,
         }}
+        transition={{ type: "spring", stiffness: 120, damping: 18 }}
       >
-        <ul>
-          {socialLinks.map((link) => (
-            <li
-              key={link.label}
-              className={`w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 shadow-lg rounded-lg mb-2 ${link.color}`}
+        <Link
+          to="home"
+          smooth
+          duration={500}
+          offset={-100}
+          className="flex items-center gap-3"
+          onClick={() => setMenuOpen(false)}
+        >
+          <span className="h-10 w-10 rounded-full bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 text-sm font-black tracking-[0.35em] uppercase flex items-center justify-center text-white shadow-lg shadow-pink-500/40">
+            JW
+          </span>
+          <div className="hidden sm:flex flex-col leading-tight">
+            <span className="text-[11px] uppercase text-white/60 tracking-[0.4em]">
+              Portfolio
+            </span>
+            <span className="text-sm font-semibold text-white">
+              Jaroslav Wolný
+            </span>
+          </div>
+        </Link>
+
+        <nav className="hidden md:flex items-center gap-1 ml-6">
+          {navItems.map((item) => (
+            <Link
+              key={item.id}
+              to={item.id}
+              smooth
+              duration={500}
+              offset={-100}
+              className={`${navLinkClasses} hover:bg-white/5`}
             >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="ml-auto flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
+            {socials.map((social) => (
               <a
-                className="flex justify-between items-center w-full text-white font-semibold"
-                href={link.href}
+                key={social.id}
+                href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={link.label}
+                className="text-white/70 hover:text-white transition-colors"
+                aria-label={social.id}
               >
-                {link.label}
-                <span className="ml-2">{link.icon}</span>
+                {social.icon}
               </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
+            ))}
+          </div>
+
+          <Link
+            to="contact"
+            smooth
+            duration={500}
+            offset={-100}
+            className="hidden md:inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-pink-500 to-purple-500 px-5 py-2 text-sm font-semibold text-gray-900 shadow-lg shadow-pink-500/40"
+          >
+            Let's build
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className="rounded-full border border-white/20 p-2 text-white focus:outline-none md:hidden"
+            aria-label="Toggle navigation"
+          >
+            {menuOpen ? <IoClose size={22} /> : <HiOutlineMenuAlt4 size={22} />}
+          </button>
+        </div>
+      </motion.div>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="fixed inset-0 z-30 bg-black/60 backdrop-blur"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="absolute top-24 left-1/2 w-[90%] max-w-sm -translate-x-1/2 rounded-3xl border border-white/10 bg-[#050511]/95 p-8 text-white"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ type: "spring", stiffness: 150, damping: 18 }}
+            >
+              <div className="flex flex-col gap-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.id}
+                    to={item.id}
+                    smooth
+                    duration={500}
+                    offset={-100}
+                    onClick={() => setMenuOpen(false)}
+                    className="rounded-2xl border border-white/5 px-4 py-3 text-lg font-semibold tracking-wide text-white/80 hover:text-white hover:bg-white/5"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+
+              <div className="mt-8 flex items-center justify-between text-sm text-white/60">
+                <span>Follow my drops</span>
+                <div className="flex items-center gap-3">
+                  {socials.map((social) => (
+                    <a
+                      key={social.id}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full border border-white/10 p-2 text-white/70 hover:text-white"
+                      aria-label={social.id}
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 };
 

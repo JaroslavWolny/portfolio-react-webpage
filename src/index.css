@@ -1,17 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap");
-
 @layer base {
   body {
-    @apply font-[Raleway];
+    font-family: "Space Grotesk", "Raleway", sans-serif;
+    @apply bg-[#030617] text-white antialiased;
   }
   li {
     @apply px-4;
     @apply cursor-pointer;
   }
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #030617;
+}
+
+body {
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
 }
 
 .content-div {

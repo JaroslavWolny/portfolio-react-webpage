@@ -5,6 +5,8 @@
   "homepage": "https://jaroslavwolny.github.io/portfolio-react-webpage",
   "dependencies": {
     "@headlessui/react": "^2.2.2",
+    "@react-three/drei": "^9.105.3",
+    "@react-three/fiber": "^8.15.18",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -20,6 +22,7 @@
     "react-scripts": "5.0.1",
     "react-scroll": "^1.9.0",
     "tailwind": "^4.0.0",
+    "three": "^0.159.0",
     "typewriter-effect": "^2.21.0",
     "web-vitals": "^2.1.0"
   },
